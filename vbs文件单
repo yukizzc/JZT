@@ -1,0 +1,38 @@
+
+Dim a
+path="D:\csv"'下单信号完整路径
+
+path_bak = "D:\csv_bak"
+call ShowFolderList(path)
+
+
+sub ShowFolderList(folderspec)
+Dim fso, f, f1, fc, s'定义变量
+Dim f_type
+Set fso = CreateObject("Scripting.FileSystemObject") '创建对象
+Set f = fso.GetFolder(folderspec)'得到文件夹下folder对象
+Set fc = f.Files
+
+For Each f1 in fc'查找所有符合条件的文件名
+	'判断文件类型是csv
+	f_type = right(f1.name,3)
+	if f_type = "csv" then
+		'符合条件的文件绝对路径
+		file = path&"\"&f1.name
+		'application.MsgOut file
+		
+		set ttfile = fso.opentextfile(file)
+		read = ttfile.ReadLine
+		'每个文件内容
+		'application.MsgOut read
+		
+		strarr = split(read,",")
+		for i=0 to ubound(strarr)
+			application.MsgOut strarr(i)
+		next
+		fso.CopyFile file,path_bak&"\"&f1.name
+		fso.DeleteFile file
+	end if
+Next
+
+End sub
