@@ -1,3 +1,23 @@
 vbs操作文件的链接
 http://www.360doc.com/content/14/0606/15/219800_384287850.shtml
+-----------------------------------------------------------------------------------------------------------
+vbs遍历文件夹内文件
+Dim a
+a="D:\csv"'目标文件夹完整路径
+ShowFolderList(a)
 
+Function ShowFolderList(folderspec)
+Dim fso, f, f1, fc, s'定义变量
+Set fso = CreateObject("Scripting.FileSystemObject") '创建对象
+Set f = fso.GetFolder(folderspec)'得到文件夹下folder对象
+Set fc = f.Files
+
+For Each f1 in fc'查找所有符合条件的文件名
+application.MsgOut f1.name
+s = s & f1.name 
+s = s & vbcrlf'得到结果并换行
+Next
+ShowFolderList = s
+End Function
+
+--------------------------------------------------------------------------------------------
