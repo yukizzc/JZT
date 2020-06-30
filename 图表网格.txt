@@ -10,9 +10,28 @@ ATR := MA(TR1,m);
 
 //用每天开盘价做基准，然后实行低买高卖，只赚取n个价位盈利。
 input:n(5,1,10,1);
+//用n个变动价位作为网格格子
+if flag=1 then 
+begin 
+	if c<kcj-n*mindiff then 
+	begin
+		sellshort(1,holding,marketr);
+		buy(holding=0,1,marketr);
+		kcj:=close;
+	end
+	if c>kcj+n*mindiff then 
+	begin
+		sell(1,holding,marketr);
+		buyshort(holding=0,1,marketr);
+		kcj:=close;
+	end
+end 
+
+
+
 
 //用atr作为网格格子
-if flag=1 then 
+if flag=2 then 
 begin
 	if c<kcj-atr then 
 	begin
@@ -28,22 +47,6 @@ begin
 	end
 end 
 
-//用n个变动价位作为网格格子
-if flag=2 then 
-begin 
-	if c<kcj-n*mindiff then 
-	begin
-		sellshort(1,holding,marketr);
-		buy(holding=0,1,marketr);
-		kcj:=close;
-	end
-	if c>kcj+n*mindiff then 
-	begin
-		sell(1,holding,marketr);
-		buyshort(holding=0,1,marketr);
-		kcj:=close;
-	end
-end 
 	
 
 //止损
