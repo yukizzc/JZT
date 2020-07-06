@@ -1,0 +1,16 @@
+//训练数据
+ref_num:=20;
+x1:stkindi('','ma.ma1',0,6,-ref_num);
+x2:stkindi('','ma.ma3',0,6,-ref_num);
+x3:stkindi('','ma.ma4',0,6,-ref_num);
+x4:stkindi('','MACD.macd1',0,6,-ref_num);
+x5:stkindi('','KDJ.J',0,6,-ref_num);
+y:(close-ref(close,ref_num))/ref(close,ref_num)
+
+
+//测试数据
+x1:stkindi('','ma.ma1',0,6,0);
+x2:stkindi('','ma.ma3',0,6,0);
+x3:stkindi('','ma.ma4',0,6,0);
+x4:stkindi('','MACD.macd1',0,6,0);
+x5:stkindi('','KDJ.J',0,6,0);
